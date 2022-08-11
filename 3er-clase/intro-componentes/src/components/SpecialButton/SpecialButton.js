@@ -9,7 +9,7 @@ class SpecialButton extends Component{
     
     render(){
         return(
-            <button onClick ={() => this.metodoEspecial()} >Soy el boton especial</button>
+            <button onClick ={() => this.metodoEspecial()} >El boton especial</button>
         )
     }
 }
