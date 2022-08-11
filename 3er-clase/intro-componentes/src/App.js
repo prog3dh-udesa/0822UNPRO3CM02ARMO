@@ -1,12 +1,14 @@
 import React from 'react'
 import Header from './components/Header';
-import Card from './components/Card/Card';
-import Category from './components/Category/Category';
+import Cards from './components/Cards/Cards';
+import Categories from './components/Categories/Categories';
 import Footer from './components/Footer/Footer';
 import Characters from './components/Characters/Characters';
+import SpecialButton from './components/SpecialButton/SpecialButton';
 
 
 function App() {
+
   const opciones = ['ADMIN', 'Charts', 'Pages', 'Tables', 'Paseo de perros']
 
   const tarjetas = [
@@ -48,18 +50,13 @@ function App() {
   return (
     <>
       <Header nombre={'Walter'} menu={opciones}/>
+      <SpecialButton />
       <main>
-        <h1>My app in React</h1>
-        <section className="top-data">
-          {tarjetas.map((tarjeta) => <Card info={tarjeta}/>)}
-        </section>
-        <h2>Categories in database</h2>
-        <section className='general-data'>
-          {categorias.map( (categoria) => <Category number={categoria} />)}
-        </section>
+        <Cards info={tarjetas}/>
+        <Categories info={categorias} />
         <h2>Personajes de películas</h2>
         <section className="card-container">
-          {personajes.map((personaje) => <Characters  info={personaje} />)}
+          {personajes.map((personaje, idx) => <Characters key={`${Date.now()}-${idx}`}  info={personaje} />)}
         </section>
       </main>
       <Footer />

@@ -5,7 +5,7 @@ function Header(props){
     return(
         <nav>
         <ul className="main-nav">
-            {props.menu.map((opcion) =><li>{opcion}</li>)}
+            {props.menu.map((opcion, idx) =><li key={`${Date.now()}-${idx}`} >{opcion}</li>)}
         </ul>
         <ul className={`user ${props.clase}`}>
             <li>{props.nombre}
