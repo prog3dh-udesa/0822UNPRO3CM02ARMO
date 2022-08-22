@@ -5,7 +5,6 @@ import Categories from './components/Categories/Categories';
 import Footer from './components/Footer/Footer';
 import Characters from './components/Characters/Characters';
 import SpecialButton from './components/SpecialButton/SpecialButton';
-import Contador from './components/Contador/Contador';
 
 
 function App() {
@@ -55,12 +54,10 @@ function App() {
       <main>
         <Cards info={tarjetas}/>
         <Categories info={categorias} />
-        <Contador 
-        valorInicial={7}
-        valorRestar={5}
-        valorSumar={5}
-        />
-       <Characters />
+        <h2>Personajes de películas</h2>
+        <section className="card-container">
+          {personajes.map((personaje, idx) => <Characters key={`${Date.now()}-${idx}`}  info={personaje} />)}
+        </section>
       </main>
       <Footer />
     </>

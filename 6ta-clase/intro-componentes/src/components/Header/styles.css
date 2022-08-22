@@ -1,0 +1,36 @@
+/* Navigation */
+nav{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0 20px;
+    background-color: #4e73df;
+    color: #fff
+}
+
+nav ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.main-nav li,
+.user li {
+    margin: 0 10px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+}
+
+.main-nav li:first-child {
+    font-weight: bold;
+}
+
+.user img {
+    width: 30px;
+    border-radius: 90%;
+    margin-left: 10px;
+}
