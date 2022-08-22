@@ -39,23 +39,38 @@ class Characters extends Component {
   constructor(props){
     super(props)
     this.state={
-      personajes: info,
-      backup: info,
-      prueba:''
+      personajes: [],
+      backup: [],
+      prueba:'',
+      pagina:0
     }
-    console.log('Soy el constructor')
   }
 
   componentDidMount(){
     fetch('https://rickandmortyapi.com/api/character')
     .then(resp => resp.json())
-    .then(data => console.log(data))
+    .then(data => this.setState({
+      personajes: data.results,
+      backup: data.results,
+      pagina: this.state.pagina + 1
+    }))
     .catch(err => console.log(err))
   }
 
+  cargarMas(){
+    fetch(`https://rickandmortyapi.com/api/character?page=${this.state.pagina + 1}`)
+    .then(resp => resp.json())
+    .then(data => this.setState({
+      personajes: this.state.personajes.concat(data.results),
+      pagina: this.state.pagina + 1
+    }))
+    .catch(err => console.log(err))
 
-  borrar(name){
-    let arrayFiltrado = this.state.personajes.filter(personaje => personaje.name !== name)
+  }
+
+
+  borrar(id){
+    let arrayFiltrado = this.state.personajes.filter(personaje => personaje.id !== id)
     this.setState({
       personajes: arrayFiltrado
     })
@@ -67,23 +82,8 @@ class Characters extends Component {
     })
   }
 
-  componentDidUpdate(){
-    console.log('Soy el update')
-    //ESTO LO VAMOS A EVITAR A TODA COSTA
-    // this.setState({
-    //   prueba:'prueba'
-    // })
-    //ESTO LO VAMOS A EVITAR A TODA COSTA
-
-  }
-
-  componentWillUnmount(){
-    console.log('Soy el Unmount')
-  }
-
 
   render(){
-    console.log('Soy el render')
     return (
       <>
         <h2>Personajes de películas</h2>
@@ -96,6 +96,7 @@ class Characters extends Component {
             />)}
 
             <button onClick={()=> this.backup()}>Backup</button>
+            <button onClick={()=> this.cargarMas()}>Cargar mas</button>
         </section>
       </>
     )

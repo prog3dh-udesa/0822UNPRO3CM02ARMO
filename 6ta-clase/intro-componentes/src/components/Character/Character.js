@@ -28,12 +28,13 @@ class Character extends Component {
         return (
                 <div className="character-card">
                     <img 
-                        src={`./img/characters/characters/${this.props.info.img}`}
+                        src={this.props.info.image}
                         alt={`Una imagen de ${this.props.info.name}`}
                     />
                     <h4>{this.props.info.name}</h4>
                     <p>Character description:</p>
-                    <p>{this.props.info.description}</p>
+                    <p>{this.props.info.status}</p>
+                    <p>{this.props.info.species}</p>
                     {
                     this.state.showMore ?
                         <p>{this.props.info.extra}</p>
@@ -44,7 +45,7 @@ class Character extends Component {
                         ()=> this.changeShowMore()
                     }>{this.state.textoBoton}</a>
 
-                    <button onClick={() => this.props.borrar(this.props.info.name)}>borrar</button>
+                    <button onClick={() => this.props.borrar(this.props.info.id)}>borrar</button>
                 </div>
         
             )
