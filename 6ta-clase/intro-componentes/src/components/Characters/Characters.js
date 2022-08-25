@@ -42,7 +42,8 @@ class Characters extends Component {
       personajes: [],
       backup: [],
       prueba:'',
-      pagina:0
+      pagina:0,
+      favorito:[]
     }
   }
 
@@ -66,6 +67,20 @@ class Characters extends Component {
     }))
     .catch(err => console.log(err))
 
+  }
+
+  favorites(id){
+    let favoritoArr = this.state.personajes.filter(elm => elm.id === id)
+    this.setState({
+      favorito: this.state.favorito.concat(favoritoArr)
+    })
+
+    let arrayAGuardar = JSON.stringify(this.state.favorito)
+
+    localStorage.setItem('favoritos', arrayAGuardar)
+
+    let recuperarStorage = localStorage.getItem('favoritos')
+    console.log(JSON.parse(recuperarStorage))
   }
 
 
@@ -93,6 +108,7 @@ class Characters extends Component {
               key={`${Date.now()}-${idx}`}  
               info={personaje}
               borrar={(name)=> this.borrar(name)}
+              favorito={(id)=> this.favorites(id)}
             />)}
 
             <button onClick={()=> this.backup()}>Backup</button>

@@ -44,7 +44,7 @@ class Character extends Component {
                     <a onClick={
                         ()=> this.changeShowMore()
                     }>{this.state.textoBoton}</a>
-
+                    <button onClick={()=> this.props.favorito(this.props.info.id)}>Favoritos</button>
                     <button onClick={() => this.props.borrar(this.props.info.id)}>borrar</button>
                 </div>
         
