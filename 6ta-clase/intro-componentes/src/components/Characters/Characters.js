@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import Character from '../Character/Character'
+import Search from '../Search/Search';
 
 const info = [
   {
@@ -71,6 +72,8 @@ class Characters extends Component {
 
   favorites(id){
     let favoritoArr = this.state.personajes.filter(elm => elm.id === id)
+
+    
     this.setState({
       favorito: this.state.favorito.concat(favoritoArr)
     })
@@ -97,10 +100,18 @@ class Characters extends Component {
     })
   }
 
+  filtrarPersonajes(nombre){
+    let arrFiltrado = this.state.backup.filter(personaje => personaje.name.toLowerCase().includes(nombre.toLowerCase()))
+    this.setState({
+      personajes: arrFiltrado
+    })
+  }
+
 
   render(){
     return (
       <>
+      <Search filtrar={(nombre)=> this.filtrarPersonajes(nombre)} />
         <h2>Personajes de películas</h2>
         <section className="card-container">
           {this.state.personajes.map((personaje, idx) => 
