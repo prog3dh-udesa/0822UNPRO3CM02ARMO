@@ -1,0 +1,18 @@
+.data-detail {
+    width: 32%;
+    border-radius: 4px;
+    background-color: #fff;
+    padding: 10px 30px;
+    text-transform: capitalize;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.data-detail p {
+    margin-top:0;
+}
+.data-detail h4 {
+    margin-bottom: 0;
+}
