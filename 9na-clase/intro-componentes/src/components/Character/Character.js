@@ -11,6 +11,18 @@ class Character extends Component {
         }
     }
 
+    componentDidMount(){
+        let storage = localStorage.getItem('favoritos')
+        let parsedStorage = JSON.parse(storage) /*Array.includes()*/
+        let isFavorite = parsedStorage.includes(this.props.info.id)
+        if(isFavorite){
+            this.setState({
+                favorito: true
+            })
+        }
+    }
+
+
     changeShowMore(){
         if(this.state.showMore){
             this.setState({
@@ -25,29 +37,32 @@ class Character extends Component {
         }
     }
 
-    favorito(id){
-        let storageFav = localStorage.getItem("favoritos")
-        if(storageFav == null){
+    addFavorites(id){
+        let storage = localStorage.getItem('favoritos')
+        
+        if(storage == null){
             let idsArr = [id]
             let idsArrToString = JSON.stringify(idsArr)
             localStorage.setItem('favoritos', idsArrToString)
-        } else{
-            let storageParsed = JSON.parse(storageFav)
-            storageParsed.push(id)
-            let storageParsedToString = JSON.stringify(storageParsed)
-            localStorage.setItem('favoritos', storageParsedToString)
+        } else {
+            let parsedStorage = JSON.parse(storage)
+            parsedStorage.push(id)
+            let storageToString = JSON.stringify(parsedStorage)
+            localStorage.setItem('favoritos', storageToString)
         }
+        
         this.setState({
             favorito: true
         })
     }
 
-    sacarFavorito(id){
-        let storageFav = localStorage.getItem('favoritos')
-        let favsParsed = JSON.parse(storageFav)
-        let favsFiltered = favsParsed.filter(elm => elm !== id)
-        let favsToString = JSON.stringify(favsFiltered)
-        localStorage.setItem('favoritos', favsToString)
+    removeFavorites(id){
+        /*Parametro recibido 95*/
+        let storage = localStorage.getItem('favoritos')
+        let storageParsed = JSON.parse(storage) /*[1, 2, 4, 95] */
+        let filteredStorage = storageParsed.filter(elm => elm !== id)
+        let storageToString = JSON.stringify(filteredStorage)
+        localStorage.setItem('favoritos', storageToString)
         this.setState({
             favorito: false
         })
@@ -76,9 +91,9 @@ class Character extends Component {
                     }>{this.state.textoBoton}</a>
                     {
                         this.state.favorito ?
-                            <button onClick={(id)=> this.sacarFavorito(this.props.info.id)}>Sacar Favorito</button>
+                        <button onClick={() => this.removeFavorites(this.props.info.id)}>Sacar favoritos</button>
                         :
-                            <button onClick={(id)=> this.favorito(this.props.info.id)}>Favoritos</button>
+                        <button onClick={() => this.addFavorites(this.props.info.id)}>Favoritos</button>
                     }
                     <button onClick={() => this.props.borrar(this.props.info.id)}>borrar</button>
                 </div>

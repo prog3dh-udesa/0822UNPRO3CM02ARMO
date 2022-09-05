@@ -7,12 +7,13 @@ class Prueba extends Component {
             valor:''
         }
     }
-
+    //Con este metodo ustedes desactivan el comportamiento default del FORM
     evitarSubmit(event){
         console.log(event)
         event.preventDefault()
     }
 
+    //Con este metodo ustedes gestionan el valor que hay en el INPUT
     guardarValor(event){
         this.setState({
             valor: event.target.value

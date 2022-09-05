@@ -36,6 +36,20 @@ class Characters extends Component {
 
   }
 
+  favorites(id){
+    let favoritoArr = this.state.personajes.filter(elm => elm.id === id)
+    this.setState({
+      favorito: this.state.favorito.concat(favoritoArr)
+    })
+
+    let arrayAGuardar = JSON.stringify(this.state.favorito)
+
+    localStorage.setItem('favoritos', arrayAGuardar)
+
+    let recuperarStorage = localStorage.getItem('favoritos')
+    console.log(JSON.parse(recuperarStorage))
+  }
+
 
   borrar(id){
     let arrayFiltrado = this.state.personajes.filter(personaje => personaje.id !== id)
