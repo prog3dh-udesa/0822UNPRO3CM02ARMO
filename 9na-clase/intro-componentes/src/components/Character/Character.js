@@ -14,7 +14,10 @@ class Character extends Component {
     componentDidMount(){
         let storage = localStorage.getItem('favoritos')
         let parsedStorage = JSON.parse(storage) /*Array.includes()*/
-        let isFavorite = parsedStorage.includes(this.props.info.id)
+        let isFavorite
+        if(parsedStorage !== null){
+           isFavorite = parsedStorage.includes(this.props.info.id)
+        }
         if(isFavorite){
             this.setState({
                 favorito: true

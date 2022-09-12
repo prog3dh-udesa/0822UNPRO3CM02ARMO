@@ -5,6 +5,7 @@ import Footer from './components/Footer/Footer';
 
 import {Route, Switch} from 'react-router-dom'
 import Home from './screens/Home/Home'
+import Favoritos from './screens/Favoritos/Favoritos';
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
       <Header nombre={'Walter'} menu={opciones}/>
       <Switch>
         <Route exact path='/' component={Home}/>
+        <Route path='/favoritos' component={Favoritos}/>
       </Switch>
       <Footer />
     </>
