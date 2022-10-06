@@ -38,10 +38,10 @@ class Home extends Component {
         .then(resp => resp.json())
         .then(data => {
             this.setState({
-            resultadosBusqueda:data.data,
-            readyResultados:true
+                resultadosBusqueda:data.data,
+                readyResultados:true
+            })
         })
-    })
         .catch(err => console.log(err))
     }
 
