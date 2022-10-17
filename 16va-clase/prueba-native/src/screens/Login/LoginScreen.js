@@ -2,7 +2,7 @@ import { Text, View, StyleSheet, TouchableOpacity, TextInput } from 'react-nativ
 import React, { Component } from 'react'
 import { auth } from '../../firebase/config'
 
-class Login extends Component {
+class LoginScreen extends Component {
     constructor(props){
         super(props)
         this.state = {
@@ -12,6 +12,15 @@ class Login extends Component {
     }
 
 
+    componentDidMount(){
+      auth.onAuthStateChanged(user => {
+          console.log(user)
+          if(user !== null){
+            this.props.navigation.navigate('TabNavigation')
+          }
+      })
+    }
+
     loguear(email, password){
         auth.signInWithEmailAndPassword(email, password)
         .then(resp => {
@@ -20,7 +29,6 @@ class Login extends Component {
         .catch( err => console.log(err))
     }
   render() {
-    console.log(this.props)
     return (
       <View>
         <Text>Login</Text>
@@ -55,4 +63,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default Login
+export default LoginScreen
