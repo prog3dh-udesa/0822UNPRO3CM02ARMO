@@ -47,9 +47,15 @@ class Register extends Component {
 }
 
 const styles = StyleSheet.create({
-    input:{
-        borderWidth: 2,
-    }
-})
+    container:{
+      flex:1,
+      justifyContent:'center',
+      paddingHorizontal:24
+    },
+      input:{
+          borderWidth:1
+      }
+  })
+  
 
 export default Register

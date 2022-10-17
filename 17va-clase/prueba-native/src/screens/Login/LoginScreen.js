@@ -15,39 +15,45 @@ class LoginScreen extends Component {
     loguear(email, password){
         auth.signInWithEmailAndPassword(email, password)
         .then(resp => {
-            console.log(resp)
+            this.props.navigation.navigate('TabNavigation')
         })
         .catch( err => console.log(err))
     }
   render() {
     return (
-      <View>
-        <Text>Login</Text>
-        <TextInput
-            style={styles.input}
-            keyboardType='email-address'
-            placeholder='Ingresa tu email'
-            onChangeText={text => this.setState({email: text})}
-            value={this.state.email}
-        />
-        <TextInput
-            style={styles.input}
-            keyboardType='default'
-            placeholder='Ingresa tu Password'
-            onChangeText={text => this.setState({password: text})}
-            value={this.state.password}
-            secureTextEntry={true}
-        />
+      <View style={styles.container}>
         <View>
-            <TouchableOpacity onPress={()=> this.loguear(this.state.email, this.state.password)}>
-                <Text>Log In</Text>
-            </TouchableOpacity>
-        </View>
 
-        <View>
-          <TouchableOpacity onPress={()=> this.props.navigation.navigate('Register')}>
-            <Text>Registrarme</Text>
-          </TouchableOpacity>
+          <Text>Login</Text>
+          <TextInput
+              style={styles.input}
+              keyboardType='email-address'
+              placeholder='Ingresa tu email'
+              onChangeText={text => this.setState({email: text})}
+              value={this.state.email}
+          />
+          <TextInput
+              style={styles.input}
+              keyboardType='default'
+              placeholder='Ingresa tu Password'
+              onChangeText={text => this.setState({password: text})}
+              value={this.state.password}
+              secureTextEntry={true}
+          />
+          <View>
+              <TouchableOpacity onPress={()=> this.loguear(this.state.email, this.state.password)}>
+                  <Text>Log In</Text>
+              </TouchableOpacity>
+          </View>
+
+          <View>
+            <Text>
+              Aun no tienes una cuenta
+            </Text>
+            <TouchableOpacity onPress={()=> this.props.navigation.navigate('Register')}>
+              <Text>Registrate</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     )
@@ -55,6 +61,11 @@ class LoginScreen extends Component {
 }
 
 const styles = StyleSheet.create({
+  container:{
+    flex:1,
+    justifyContent:'center',
+    paddingHorizontal:24
+  },
     input:{
         borderWidth:1
     }

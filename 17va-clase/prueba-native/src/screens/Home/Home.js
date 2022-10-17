@@ -36,10 +36,6 @@ function Home(props) {
           keyExtractor={item => item.id.toString()}
           renderItem={({item}) => <Text>{item.title}</Text>}
         />
-        <TouchableOpacity onPress={() => props.navigation.navigate('Login')}>
-          <Text>Ir a login</Text>
-        </TouchableOpacity>
-        <ActivityIndicator color='red' size={20} />
       </View>
     </>
   )
