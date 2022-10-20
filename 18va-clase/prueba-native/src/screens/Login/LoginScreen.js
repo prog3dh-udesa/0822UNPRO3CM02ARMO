@@ -1,6 +1,6 @@
 import { Text, View, StyleSheet, TouchableOpacity, TextInput } from 'react-native'
 import React, { Component } from 'react'
-import { auth, db } from '../../firebase/config'
+import { auth } from '../../firebase/config'
 
 class LoginScreen extends Component {
     constructor(props){
@@ -11,10 +11,21 @@ class LoginScreen extends Component {
         }
     }
 
+    componentDidMount(){
+      auth.onAuthStateChanged(user => {
+        if(user !== null){
+          this.props.navigation.navigate('TabNavigation')
+        }
+      })
+      /* auth.signOut() */
+    }
+
 
     loguear(email, password){
         auth.signInWithEmailAndPassword(email, password)
-        .then(()=> this.props.navigation.navigate('TabNavigation'))
+        .then(resp => {
+            this.props.navigation.navigate('TabNavigation')
+        })
         .catch( err => console.log(err))
     }
   render() {

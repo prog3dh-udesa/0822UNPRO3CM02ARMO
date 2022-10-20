@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import {FontAwesome} from '@expo/vector-icons'
 import Home from '../screens/Home/Home'
 import Perfil from '../screens/Perfil/Perfil'
+import Posts from '../screens/Posts/Posts'
 
 const Tab = createBottomTabNavigator()
 
@@ -23,6 +24,10 @@ export default function TabNavigation() {
         options={{
             tabBarIcon: () => <FontAwesome name='music' size={32} color='red' />
         }}
+        />
+        <Tab.Screen
+          name='Posts'
+          component={Posts}
         />
     </Tab.Navigator>
   )
