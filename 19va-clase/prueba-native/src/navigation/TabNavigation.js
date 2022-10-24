@@ -26,8 +26,8 @@ export default function TabNavigation() {
         }}
         />
         <Tab.Screen
-          name='Posts'
-          component={Posts}
+        name='NewPost'
+        component={Posts}
         />
     </Tab.Navigator>
   )

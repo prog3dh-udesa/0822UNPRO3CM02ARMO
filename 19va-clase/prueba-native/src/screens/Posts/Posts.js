@@ -1,44 +1,47 @@
 import { Text, View, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
 import React, { Component } from 'react'
-import { db, auth } from '../../firebase/config'
+import {auth, db} from '../../firebase/config'
+
 
 class Posts extends Component {
+
     constructor(){
         super()
-        this.state = {
-            comentario:''        
+        this.state={
+            description:''
         }
     }
 
-    enviarComentario(comentario){
+    enviarPost(description){
         db.collection('posts').add({
             owner:auth.currentUser.email,
-            date: Date.now(),
-            comment: comentario
+            createdAt: Date.now(),
+            description: description,
+            likes:[],
+            comments:[]
         })
-        .then(()=>{
-            this.setState({comentario:''})
-        })
+        .then(resp => console.log('hizo el posteo'))
         .catch(err => console.log(err))
+
     }
+
 
 
     render() {
         return (
         <View>
-            <Text>Crea tu posteo</Text>
             <TextInput
                 keyboardType='default'
-                placeholder='Escribi tu comentario'
-                onChangeText={text => this.setState({comentario: text})}
-                style = {styles.input}
-                value={this.state.comentario}
+                onChangeText={text => this.setState({description:text})}
+                value={this.state.description}
+                style={styles.input}
+                placeholder='Deja tu descripcion'
             />
-            <View>
-                <TouchableOpacity onPress={()=> this.enviarComentario(this.state.comentario)}>
-                    <Text>Enviar comentario</Text>
-                </TouchableOpacity>
-            </View>
+            <TouchableOpacity
+            onPress={()=> this.enviarPost(this.state.description)}
+            >
+                <Text>Enviar Post</Text>
+            </TouchableOpacity>
         </View>
         )
     }
@@ -46,8 +49,8 @@ class Posts extends Component {
 
 const styles = StyleSheet.create({
     input:{
-        height:64,
-        borderWidth:1
+        borderWidth:1,
+        height:48
     }
 })
 
