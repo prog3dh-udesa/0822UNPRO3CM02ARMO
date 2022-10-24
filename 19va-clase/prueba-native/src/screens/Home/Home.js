@@ -37,13 +37,6 @@ function Home(props) {
           renderItem={({item}) => <Text>{item.title}</Text>}
         />
       </View>
-      <TouchableOpacity onPress={() => props.navigation.navigate('ProfileUser')}>
-        <Text>Voy a ir al perfil de un usuario Random</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity onPress={() => props.navigation.navigate('ProfileUser')}>
-        <Text>Voy a ir a los comentarios</Text>
-      </TouchableOpacity>
     </>
   )
 }

@@ -1,6 +1,6 @@
 import { Text, View, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
 import React, { Component } from 'react'
-import { db, auth } from '../../firebase/config's
+import { db, auth } from '../../firebase/config'
 
 class Posts extends Component {
     constructor(){
@@ -14,9 +14,7 @@ class Posts extends Component {
         db.collection('posts').add({
             owner:auth.currentUser.email,
             date: Date.now(),
-            description: comentario,
-            likes:[],
-            comments:[]
+            comment: comentario
         })
         .then(()=>{
             this.setState({comentario:''})

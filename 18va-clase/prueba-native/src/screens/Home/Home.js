@@ -11,6 +11,7 @@ import React, {Component} from 'react'
 import Contador from '../../components/Contador/Contador'
 import {info} from '../../api/data'
 import {db} from '../../firebase/config'
+import Post from '../../components/Post/Post'
 
 class Home extends Component {
   constructor(props){
@@ -52,7 +53,7 @@ class Home extends Component {
             <FlatList
               data={this.state.allPosts}
               keyExtractor={item => item.id.toString()}
-              renderItem={({item}) => <Text>{item.data.comment}</Text>}
+              renderItem={({item}) => <Post info={item.data}/>}
             />
           </View>
           : ''

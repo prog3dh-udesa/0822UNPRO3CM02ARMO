@@ -12,7 +12,7 @@ class Post extends Component {
     render() {
         return (
         <View>
-            <Text>Post</Text>
+            <Text>{this.props.description}</Text>
         </View>
         )
     }
