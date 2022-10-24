@@ -1,18 +1,28 @@
 import React, { Component } from 'react'
 import { Text, View, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
-import {auth} from '../../firebase/config'
+import {auth, db} from '../../firebase/config'
 
 class Register extends Component {
     constructor(){
         super()
         this.state ={
-            input1:'',
-            input2:''
+            username:'',
+            email:'',
+            password:''
         }
     }
 
-    registrarUsuario(email, password){
+    registrarUsuario(username, email, password){
         auth.createUserWithEmailAndPassword(email, password)
+        .then(()=> {
+            return(
+                db.collection('users').add({
+                    email:email,
+                    username:username,
+                    createdAt:Date.now()
+                })
+            )
+        })
         .then(resp => this.props.navigation.navigate('Home'))
         .catch(err => console.log(err))      
     }
@@ -21,24 +31,31 @@ class Register extends Component {
     return (
     <View style={styles.container}>
         <View>
-            <Text>Formulario</Text>
+            <Text>Formulario de registro</Text>
+            <TextInput
+                style={styles.input}
+                placeholder='Escribe tu nombre de usuario'
+                keyboardType='default'
+                onChangeText={text => this.setState({username: text})}
+                value={this.state.username}
+            />
             <TextInput
                 style={styles.input}
                 placeholder='Escribe tu email'
                 keyboardType='email-address'
-                onChangeText={text => this.setState({input1: text})}
-                value={this.state.input1}
+                onChangeText={text => this.setState({email: text})}
+                value={this.state.email}
             />
             <TextInput
                 style={styles.input}
                 placeholder='Escribe tu password'
                 keyboardType='default'
-                onChangeText={text => this.setState({input2: text})}
-                value={this.state.input2}
+                onChangeText={text => this.setState({password: text})}
+                value={this.state.password}
                 secureTextEntry={true}
             />
             <View>
-                <TouchableOpacity onPress={()=> this.registrarUsuario(this.state.input1, this.state.input2)}>
+                <TouchableOpacity onPress={()=> this.registrarUsuario(this.state.username, this.state.email, this.state.password)}>
                     <Text>Registrarme</Text>
                 </TouchableOpacity>
             </View>
