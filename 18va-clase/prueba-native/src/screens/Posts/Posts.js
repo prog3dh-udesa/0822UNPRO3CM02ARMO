@@ -14,7 +14,9 @@ class Posts extends Component {
         db.collection('posts').add({
             owner:auth.currentUser.email,
             date: Date.now(),
-            comment: comentario
+            comment: comentario,
+            likes:[],
+            comments:[]
         })
         .then(()=>{
             this.setState({comentario:''})
