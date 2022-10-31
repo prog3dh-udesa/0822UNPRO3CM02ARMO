@@ -1,4 +1,11 @@
-import { Text, View, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
+import { 
+  Text, 
+  View, 
+  TextInput, 
+  TouchableOpacity, 
+  StyleSheet,
+  FlatList
+} from 'react-native'
 import React, { Component } from 'react'
 import {db, auth} from '../../firebase/config'
 import firebase from 'firebase'
@@ -44,6 +51,15 @@ class Comments extends Component {
       <View>
         <Text>Comments</Text>
         <View>
+          <FlatList
+          data={this.state.data.comments}
+          keyExtractor={item => item.createdAt.toString()}
+          renderItem={({item}) => <View>
+            <Text>{item.owner}</Text>
+            <Text>{item.comment}</Text>
+          </View>
+            }
+          />
           {/* AQUI CREEN UNA FLATLIST QUE RENDERICE LOS COMENTARIOS */}
         </View>
         <View>
