@@ -1,9 +1,10 @@
-import { Text, View } from 'react-native'
+import { Text, View, StyleSheet } from 'react-native'
 import React, { Component } from 'react'
 import { Camera } from 'expo-camera'
 import { storage } from '../../firebase/config'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 
-export default class Camera extends Component {
+export default class Camara extends Component {
     constructor(){
         super()
         this.state = {
@@ -11,7 +12,7 @@ export default class Camera extends Component {
             fotoUrl:'',
             mostrarCamara:false
         }
-        metodosDeCamara
+        this.metodosDeCamara = null
     }
 
     componentDidMount(){
@@ -42,7 +43,9 @@ export default class Camera extends Component {
             .then(()=>{
                 ref.getDownloadURL()
                 .then(url=> this.props.cuandoSeSubaLaFoto(url))
+                .catch(err => console.log(err))
             })
+            .catch(err => console.log(err))
         })
         .catch(error => console.log(error))
     }
@@ -59,11 +62,22 @@ export default class Camera extends Component {
     return (
       <View>
         <Camera
-            style
+            style ={styles.camara}
             type={Camera.Constants.Type.back}
             ref={metodosDelComponente => this.metodosDeCamara = metodosDelComponente}
         />
+        <View>
+            <TouchableOpacity onPress={()=> this.tomarFoto()}>
+                <Text>Tomar Foto</Text>
+            </TouchableOpacity>
+        </View>
       </View>
     )
   }
 }
+
+const styles = StyleSheet.create({
+    camera:{
+        flex:2,
+    }
+})
