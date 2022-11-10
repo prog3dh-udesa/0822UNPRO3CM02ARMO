@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import {FontAwesome} from '@expo/vector-icons'
 import {db, auth} from '../../firebase/config'
 import firebase from 'firebase'
+import HomeNavigation from '../../navigation/HomeNavigation'
 
 class Post extends Component {
 
@@ -61,6 +62,18 @@ class Post extends Component {
   render() {
     return (
       <View>
+        <TouchableOpacity  
+        onPress={()=> this.props.navigation.navigate(
+          'HomeNavigation', 
+          {
+            screen: 'ProfileFriends',
+            params:{
+              email:this.props.data.owner
+            }
+          }
+        )}>
+          <Text>{this.props.data.owner}</Text>
+        </TouchableOpacity>
         <Text>{this.props.data.description}</Text>
         <View>
         <Text>{this.state.likesCount}</Text>  
